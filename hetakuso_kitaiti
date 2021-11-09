@@ -1,0 +1,56 @@
+# tkinterのインポート
+import tkinter as tk
+import tkinter.ttk as ttk
+
+# rootメインウィンドウの設定
+root = tk.Tk()
+root.title("遊戯王期待値")
+root.geometry("400x400")
+
+#期待値の表示
+
+def kitaiti(a,b):
+    if a=="通常弾（30パック）":
+        if b=="SR":
+            text=(f"{a}で欲しい{b}のカードが出る期待値は60%です")
+        else:
+            text=(f"{a}で欲しい{b}のカードが出る期待値は37.5%です")
+    elif a=="デュエリストパック(15パック)":
+        if b=="SR":
+            text=(f"{a}で欲しい{b}のカードが出る期待値は約36%です")
+        else:
+            text=(f"{a}で欲しい{b}のカードが出る期待値は30%です")
+
+    elif a=="デッキビルドパック(15パック)":
+        if b=="SR":
+            text=(f"{a}で欲しい{b}のカードが出る期待値は約42%です")
+        else:
+            text=(f"{a}で欲しい{b}のカードが出る期待値は33.3%です")
+    else:
+        text="Error"
+    text1=text
+    label2['text']=text1
+
+
+
+style=ttk.Style()
+style.theme_use('classic')
+#boxの種類を判別
+box_type=["通常弾（30パック）","デュエリストパック(15パック)","デッキビルドパック(15パック)"]
+combobox_box = ttk.Combobox(root, state="readonly",values=box_type)
+combobox_box.pack(pady=10)
+#欲しいカードのレアリティを判別
+rarety =["SR","UR"]
+combobox_rare = ttk.Combobox(root, state="readonly",values=rarety)
+combobox_rare.pack(pady=10)
+buttonb=ttk.Button(
+    root, text="OK",command=lambda:kitaiti(combobox_box.get(),combobox_rare.get()))
+buttonb.pack(pady=10)
+
+#結果を表示
+label1 = tk.Label(text = '結果:')
+label1.pack()
+label2 = tk.Label()
+label2.pack()
+
+root.mainloop()
